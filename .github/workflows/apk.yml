@@ -22,12 +22,8 @@ jobs:
       with:
         flutter-version: '3.19.0'
 
-    - name: Force minSdkVersion to 23
-      run: |
-        sed -i 's/minSdkVersion flutter.minSdkVersion/minSdkVersion 23/g' android/app/build.gradle
-
     - name: Build APK
-      run: flutter build apk --release
+      run: flutter build apk --release --target-platform android-arm64
 
     - name: Upload APK
       uses: actions/upload-artifact@v3
