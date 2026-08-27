@@ -1,13 +1,13 @@
 workflows:
   android-workflow:
-    name: Android Workflow
+    name: Android Build
+    max_build_duration: 30
+    instance_type: mac_mini_m1
     environment:
-      flutter: stable
+      java: 17
+      flutter: 3.19.0
     scripts:
-      - name: Get dependencies
-        script: |
-          flutter pub get
-      - name: Build APK
+      - name: Build Android APK
         script: |
           flutter build apk --release
     artifacts:
