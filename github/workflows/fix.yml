@@ -1,4 +1,4 @@
-name: Fix Android Folder
+name: Rebuild Android Folder
 on: [push]
 permissions:
   contents: write
@@ -6,18 +6,18 @@ jobs:
   fix-folder:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.19.0'
-      - name: Re-create Android Folder
+      - name: Generate Fresh Android V2
         run: |
-          rm -rf android/
+          rm -rf android
           flutter create . --platforms=android --org com.example
-      - name: Commit and Push
+      - name: Commit Files Directly
         run: |
-          git config user.name "GitHub Action"
-          git config user.email "action@github.com"
-          git add .
-          git commit -m "Upgrade Android to v2 embedding" || echo "No changes"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add android/
+          git commit -m "Force fresh Android V2 structure"
           git push
